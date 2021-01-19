@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title', 'edit product')
+@section('title', 'add category')
     
 @section('head')
     <style>
@@ -19,16 +19,15 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-header"><h3>Update Product : {{$product->name}} </h3></div>
+                    
+                    <div class="card-header text-center"><h3>Add Category</h3></div>
                     <div class="card-body">
-                        <form action="/product/{{$product->id}}/update" class="form-group" method="POST" autocomplete="off">
-                            @method('patch')
+                        <form action="/category/create" class="form-group" method="POST">
                             @csrf
-                            <input type="hidden" name="" id="" value="{{$product->id}}">  
                             <ul>
                                 <li class="py-2">
                                     <label for="name">Nama:</label>
-                                    <input type="text" class="form-control" value="{{ old('name') ?? $product->name}}" name="name" id="name" >
+                                    <input type="text" class="form-control"  name="name" id="name" >
                                     {{-- dibawah merupakan validasi pada pengisian product, terdapat pada method store di productcontroller --}}
                                     @error('name')
                                         <div class="text-danger mt-2">
@@ -37,27 +36,17 @@
                                     @enderror
                                 </li>
                                 <li class="py-2">
-                                    <label for="price">Nama:</label>
-                                    <input type="text" class="form-control" value="{{ old('price') ?? $product->price}}" name="price" id="price" >
+                                    <label for="slug">Slug</label>
+                                    <input type="text" class="form-control"  name="slug" id="slug" >
                                     {{-- dibawah merupakan validasi pada pengisian product, terdapat pada method store di productcontroller --}}
-                                    @error('price')
+                                    @error('slug')
                                         <div class="text-danger mt-2">
                                             {{$message}}
                                         </div>
                                     @enderror
                                 </li>
                                 <li class="py-2">
-                                    <label for="desc">Description:</label>
-                                    <textarea  name="desc" id="desc" cols="30" rows="10" class="form-control ">{{ old('desc') ?? $product->desc}}</textarea>
-                                    @error('desc')
-                                        <div class="text-danger mt-2">
-                                            {{$message}}
-                                        </div>
-                                    @enderror
-                                </li>
-                                
-                                <li class="py-2">
-                                    <button type="submit" onclick="mySubmit()" class="btn btn-primary">Update</button>
+                                    <button type="submit"  class="btn btn-primary">Create</button>
                                 </li>
                             </ul>                           
                         </form>

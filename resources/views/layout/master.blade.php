@@ -24,7 +24,9 @@
      <!-- Animation Style -->
      <link rel="stylesheet" type="text/css" href="/stylesheets/animate.css">
  
- 
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
      <!-- Favicon and touch icons  -->
      <link href="icon/favicon.png" rel="shortcut icon">
  
@@ -46,12 +48,12 @@
         @include('alert')
         @yield('content')
     </div>
-
     @include('layout.footer')
 
     @yield('javascript')
 
 <!-- Javascript -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="/javascript/jquery.min.js"></script>
 <script src="/javascript/tether.min.js"></script>
 <script src="/javascript/bootstrap.min.js"></script> 

@@ -18,14 +18,19 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-title-heading">
-                        <h1 class="title">Shop</h1>
+                        @if (isset($category))
+                            <h1 class="title">Category : {{$category->name}}</h1>
+                        @else
+                            <h1 class="title">All Products</h1>
+                        @endif
+                       
                     </div><!-- /.page-title-heading -->
                     <div class="breadcrumbs">
-                        <ul>
+                        {{-- <ul>
                             <li><a href="index.html">Home</a></li>
                             <li><a href="shop-3col.html">Shop</a></li>
                             <li><a href="shop-3col.html">Fullwidth Shop</a></li>
-                        </ul>
+                        </ul> --}}
                     </div><!-- /.breadcrumbs -->
                 </div><!-- /.col-md-12 -->
             </div><!-- /.row -->
@@ -38,7 +43,9 @@
                 <div class="col-md-12">
                     <div class="filter-shop clearfix">
                         <p class="showing-product">
-                            Showing {{$products->count()}} | <a href="product/create" class="btn btn-danger">add product</a>
+                            Showing {{$products->count()}} | 
+                            <a href="\product/create" class="btn btn-danger">Add Product</a> &nbsp; &nbsp; 
+                            <a href="\category/index" class="btn btn-danger">Category</a>
                         </p>
                         <ul class="flat-filter-search">
                             <li>
@@ -120,22 +127,34 @@
                             </label>
                         </form>       
                     </div><!-- /.top-serach -->
+                   @if ($products->count())
                     <div class="product-content product-threecolumn clearfix">
                         <ul class="product">
                             @foreach ($products as $p)
                             <li class="product-item">
                                 <div class="product-thumb clearfix">
                                     <a href="#">
-                                        <img src="images/shop/sh-3/1.jpg" alt="image">
+                                        <img src="/images/iphone12.jpg" alt="image">
                                     </a>
                                 </div>
                                 <div class="product-info clearfix">
                                 <span class="product-title">{{$p->name}}</span>
                                     <div class="price">
                                         <ins>
-                                        <span class="amount">{{$p->desc}}</span>
+                                            <span class="amount">{{$p->price}}</span>
                                         </ins>
                                     </div>
+                                    <div>
+                                        <ins>
+                                            <span><p>{{$p->desc}}</p></span>
+                                        </ins>
+                                    </div>
+                                    <div>
+                                        <ins>
+                                            <span class="amount">{{$p->created_at->diffForHumans()}}</span>
+                                        </ins>
+                                    </div>
+                                    
                                     <ul class="flat-color-list">
                                         <li>
                                             <a href="#" class="red"></a>
@@ -148,18 +167,27 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <a href="product/edit" class="btn btn-danger add-to-cart text-center">Edit</a>
-                                
-                                <div class="add-to-cart text-center">
-                                    
+                                <div class="add-to-cart justify-content-between">
+                                    <a href="product/{{$p->id}}/update" >Update</a> || 
+                                    <a href="product/{{$p->id}}/delete" onclick="mydelete()" >Delete</a> ||
+                                    <a href="/product/viewdetail/{{$p->id}}">view details</a>
                                 </div>
+                                
                                 <a href="#" class="like"><i class="fa fa-heart-o"></i></a>
                             </li>
                             @endforeach
-                            
-                            
                         </ul><!-- /.product -->
                     </div><!-- /.product-content -->
+                   @else
+                       <div class="container">
+                           <div class="row">
+                               <div class="col-sm-12">
+                                    There is no products
+                               </div>
+                           </div>
+                       </div>
+                   @endif
+                   
                     <div class="product-pagination text-center margin-top-11 clearfix">
                         <ul class="flat-pagination">
                             <li class="prev">
@@ -176,77 +204,14 @@
         </div><!-- /.container -->
     </section><!-- /.flat-row -->
 
-    <section class="flat-row mail-chimp">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="text">
-                        <h3>Sign up for Send Newsletter</h3>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="subscribe clearfix">
-                        <form action="#" method="post" accept-charset="utf-8" id="subscribe-form">
-                            <div class="subscribe-content">
-                                <div class="input">
-                                    <input type="email" name="subscribe-email" placeholder="Your Email">
-                                </div>
-                                <div class="button">
-                                    <button type="button">SUBCRIBE</button>
-                                </div>
-                            </div>
-                        </form>
-                        <ul class="flat-social">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google"></i></a></li>
-                            <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        </ul><!-- /.flat-social -->
-                    </div><!-- /.subscribe -->
-                </div>
-            </div>
-        </div>
-    </section><!-- /.mail-chimp -->
-    {{-- <div class="container">
-        <div class="row d-flex justify-content-between">
-            <div class="col-sm-6">
-                <h4>All Products</h4>
-            </div>  
-            <div class="col-sm-6 text-right">
-                <a href="/product/create" class="btn btn-danger">add new product</a>
-            </div>
-        </div> 
-        <hr>
-        @if ($products->count())
-        <div class="row">
-            @foreach ($products as $p)
-                <div class="col-md-4">
-                    <div class="card mb-4" style="width: 350px;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                        <h5 class="card-title">{{$p->name}}</h5>
-                        <p class="card-text">{{$p->desc}}</p>
-                        <p class="card-text">{{$p->created_at->format("d F, Y")}}</p>
-                        <a href="#" class="btn btn-primary">Details</a>
-                        </div>
-                    </div>    
-                </div>
-            @endforeach
-        </div>
-    </div>
-    <div class="d-flex justify-content-center">
-        <div>
-            {{$p->count()}}
-        </div>
-    </div>
-    @else
-        <div class="alert alert-info">
-            there are no post
-        </div>        
-    @endif --}}
+    
 @endsection
 
 @section('javascript')
-    
+    <script>
+        function mydelete()
+        {
+            alert('are you sure wan to delete this products?');
+        }
+    </script>
 @endsection

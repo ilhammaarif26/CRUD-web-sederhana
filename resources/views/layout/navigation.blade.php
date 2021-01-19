@@ -4,7 +4,7 @@
       <div class="container clearfix" id="site-header-inner">
           <div id="logo" class="logo float-left">
               <a href="index.html" title="logo">
-                  <h2>E.Store</h2>    
+                  <h2>E.S shop</h2>    
               </a>
           </div><!-- /.logo -->
           <div class="mobile-button"><span></span></div>
@@ -87,7 +87,7 @@
                           </ul> --}}
                       </li>
                       <li class="{{request()->is('allproducts') ? ' active' : ''}}">
-                          <a href="allproducts">PRODUCTS</a>
+                          <a href="\product/index">PRODUCTS</a>
                           {{-- <ul class="submenu">
                               <li ><a href="blog-list.html">Blog List Full</a></li>
                               <li><a href="blog-list-1.html">Blog list Slide 1</a></li>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
@@ -16,9 +17,14 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('allproducts', ['products' => $products]);
+        return view('product.index', ['products' => $products]);
     }
 
+    public function viewdetail(Product $product)
+    {
+
+        return view('product.viewdetail', compact('product'));
+    }
     /**
      * Show the form for creating a new resource. 
      *
@@ -26,7 +32,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.create');
+        $category = Category::all();
+        return view('product.create', compact('category'));
     }
 
     /**
@@ -55,11 +62,12 @@ class ProductController extends Controller
 
         // return back();
 
-        // membuat validasi
+        // membuat validasi 
         $attr = request()->validate([
             'name' => 'required|min:5|max:50', //|min:5 untuk membuat minimal karakter pada input 
             'price' => 'required',
             'desc' => 'required|min:10|max:500', //|max:50 unutk menentukan maksimal arakter yang dimasukkan
+            'category_id' => 'required',
             // 'imageurl' => 'required',
         ]);
 
@@ -103,6 +111,7 @@ class ProductController extends Controller
     {
         $attr = request()->validate([
             'name' => 'required|min:5|max:50', //|min:5 untuk membuat minimal karakter pada input 
+            'price' => 'required',
             'desc' => 'required|min:10|max:500', //|max:50 unutk menentukan maksimal arakter yang dimasukkan
             // 'imageurl' => 'required',
         ]);

@@ -26,8 +26,8 @@
                             @csrf
                             <ul>
                                 <li class="py-2">
-                                    <label for="name">Name:</label>
-                                    <input type="text" class="form-control" name="name" id="name">
+                                    <label for="name">Nama:</label>
+                                    <input type="text" class="form-control"  name="name" id="name" >
                                     {{-- dibawah merupakan validasi pada pengisian product, terdapat pada method store di productcontroller --}}
                                     @error('name')
                                         <div class="text-danger mt-2">
@@ -37,7 +37,7 @@
                                 </li>
                                 <li class="py-2">
                                     <label for="price">Price:</label>
-                                    <input type="number" class="form-control" name="price" id="price">
+                                    <input type="number" class="form-control"  name="price" id="price" >
                                     {{-- dibawah merupakan validasi pada pengisian product, terdapat pada method store di productcontroller --}}
                                     @error('price')
                                         <div class="text-danger mt-2">
@@ -46,27 +46,34 @@
                                     @enderror
                                 </li>
                                 <li class="py-2">
+                                    <label for="category_id">Category:</label>
+                                    <select name="category_id" id="category_id">
+                                        <option value="">Pilih category </option>
+                                        @foreach ($category as $cat)
+                                            <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    {{-- dibawah merupakan validasi pada pengisian product, terdapat pada method store di productcontroller --}}
+                                    @error('category_id')
+                                        <div class="text-danger mt-2">
+                                            {{$message}}
+                                        </div>
+                                    @enderror
+                                </li>
+                                <li class="py-2">
                                     <label for="desc">Description:</label>
-                                    <textarea name="desc" id="desc" cols="30" rows="10" class="form-control"></textarea>
+                                    <textarea  name="desc" id="desc" cols="30" rows="10" class="form-control "></textarea>
                                     @error('desc')
                                         <div class="text-danger mt-2">
                                             {{$message}}
                                         </div>
                                     @enderror
                                 </li>
-                                {{-- <li class="py-2">
-                                    <label for="imageurl">Choose Image</label>
-                                    <input type="file" name="imageurl" id="imageurl" class="form-control ">
-                                    @error('imageurl')
-                                        <div class="text-danger mt-2">
-                                            {{$message}}
-                                        </div>  
-                                    @enderror
-                                </li> --}}
+                                
                                 <li class="py-2">
-                                    <button type="submit" onclick="mySubmit()" class="btn btn-primary">Add Product</button>
+                                    <button type="submit" onclick="mySubmit()" class="btn btn-primary">Create</button>
                                 </li>
-                            </ul>
+                            </ul>                           
                         </form>
                     </div>
                 </div>
